@@ -1,0 +1,44 @@
+services:
+  weaviate:
+    image: cr.weaviate.io/semitechnologies/weaviate:1.39.5
+    container_name: weaviate-curso
+    ports:
+      - "8080:8080"    # REST / GraphQL
+      - "50051:50051"  # gRPC (o cliente Python 4.x usa os dois)
+    restart: on-failure
+    environment:
+      # --- acesso ---
+      # Aula local, sem autenticação. NUNCA use assim em produção.
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "true"
+
+      # --- dados ---
+      # Persistidos no volume abaixo: pode parar e subir de novo sem reimportar.
+      PERSISTENCE_DATA_PATH: /var/lib/weaviate
+
+      # ⚠️ NÃO REMOVA. Sem isto o nome do nó vira o ID do contêiner, que muda a cada
+      # "docker compose up" que recria o contêiner. Como o estado do RAFT gravado no
+      # volume guarda o nome antigo, o nó novo não reconhece o próprio cluster e o
+      # Weaviate fica preso em "leader not found" — com os dados intactos e inacessíveis.
+      CLUSTER_HOSTNAME: node1
+      RAFT_BOOTSTRAP_EXPECT: 1
+
+      # --- vetorização ---
+      # Liga os módulos que chamam APIs externas (text2vec-openai, text2vec-cohere,
+      # generative-*, reranker-*...). A chave NÃO fica aqui: o notebook a envia
+      # em cada requisição, no header X-OpenAI-Api-Key / X-Cohere-Api-Key.
+      ENABLE_API_BASED_MODULES: "true"
+      DEFAULT_VECTORIZER_MODULE: none
+
+      QUERY_DEFAULTS_LIMIT: 25
+      LOG_LEVEL: info
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    healthcheck:
+      # A imagem do Weaviate não tem curl — só o wget do busybox.
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/v1/.well-known/ready"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  weaviate_data:
