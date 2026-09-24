@@ -1,0 +1,262 @@
+{
+  "id": "CursoAgenteOllam",
+  "name": "02 · Agente da legislação de Teófilo Otoni (Ollama)",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## 🤖 Agente (Ollama) — equivale à Parte 7 do notebook\n\nClique em **Open chat** (embaixo) e pergunte, por exemplo:\n- Quantos vereadores tem a Câmara Municipal?\n- Existe alguma lei sobre motoristas de aplicativo e entregadores?\n- O que diz o artigo 143 da Lei Orgânica?\n\nO modelo lê a **descrição** de cada ferramenta para decidir qual base consultar — é o mesmo papel da docstring do `@tool` no notebook. Abra o nó **Agente** e veja o *System Message*: são as mesmas `INSTRUCOES`.\n\n⚠️ Escolha as credenciais nos nós Ollama, OpenAI e Weaviate antes de conversar.",
+        "width": 560,
+        "height": 380,
+        "color": 4
+      },
+      "id": "611806ee-d10e-5c2e-9ec1-866a8f0b197a",
+      "name": "Nota: visão geral",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        -520
+      ]
+    },
+    {
+      "parameters": {
+        "options": {
+          "title": "Legislação de Teófilo Otoni (Ollama)",
+          "subtitle": "Pergunte sobre a Lei Orgânica e as leis municipais de 2024–2026",
+          "inputPlaceholder": "Digite sua pergunta..."
+        }
+      },
+      "id": "33de07a3-ad43-526a-96a4-dd705f59e7c3",
+      "name": "Chat",
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -440,
+        0
+      ],
+      "webhookId": "7d43a846-ddad-5bae-a534-e614d5d5df26"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=Você é um assistente especializado na legislação do município de Teófilo Otoni/MG.\nSeu público são cidadãos comuns, não advogados.\n\nVocê tem DUAS bases de conhecimento separadas e precisa escolher a certa:\n\n1. `consultar_lei_organica` — a Lei Orgânica, norma FUNDAMENTAL do município.\n   Assuntos: estrutura dos poderes, competências da Câmara e do Prefeito, número de\n   vereadores, mandatos, processo legislativo, vetos, orçamento, princípios gerais\n   da administração pública, direitos assegurados pelo município.\n\n2. `buscar_leis_municipais` — leis ORDINÁRIAS de 2024 a 2026.\n   Assuntos: regras concretas do dia a dia, programas municipais, denominação de\n   logradouros, obrigações de estabelecimentos, datas comemorativas, subvenções.\n\nREGRAS:\n1. Pergunta sobre \"como o município se organiza\" ou \"o que a norma fundamental diz\"\n   → Lei Orgânica. Pergunta sobre uma regra específica e concreta → leis municipais.\n2. Na dúvida, ou se a pergunta tocar os dois planos, consulte AS DUAS bases.\n3. SEMPRE cite a fonte: \"Art. N da Lei Orgânica\" ou \"Lei nº X/ANO\".\n4. NUNCA invente. Se as buscas não trouxerem base, diga que não encontrou e\n   sugira consultar o portal da Câmara Municipal.\n5. Responda em português do Brasil, de forma direta e clara para um leigo.\n6. O acervo de leis ordinárias cobre apenas 2024–2026. Avise quando isso for\n   relevante para a pergunta.",
+          "maxIterations": 10
+        }
+      },
+      "id": "8c0b82f1-5098-5fa6-a6b3-c20adf5c29eb",
+      "name": "Agente",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -100,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "model": "llama3.1:latest",
+        "options": {
+          "temperature": 0,
+          "numCtx": 16384
+        }
+      },
+      "id": "e008ad3f-b97c-5b98-afba-09e6bc9b8ba1",
+      "name": "Ollama llama3.1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOllama",
+      "typeVersion": 1,
+      "position": [
+        -360,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### 🦙 O LLM roda no Ollama\nQuem **gera a resposta** é o `llama3.1` (8B), no contêiner `ollama` (credencial Ollama com Base URL `http://ollama:11434`). Veja `ollama/README.md`.\n\nA **busca** continua igual à versão OpenAI: mesmas coleções e mesmos embeddings, então rode antes o workflow **01 · Ingestão**.\n\n*Context Length* = 16 mil tokens: o padrão do Ollama corta as instruções + os trechos devolvidos pelas ferramentas.",
+        "width": 440,
+        "height": 260,
+        "color": 3
+      },
+      "id": "35be5ab8-1363-5452-b03a-e8b93b3a7de5",
+      "name": "Nota: modelo",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "contextWindowLength": 10
+      },
+      "id": "f909400e-d5b3-5313-890c-b4b2fca32dd9",
+      "name": "Memória da conversa",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -180,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Consulta a LEI ORGÂNICA do Município de Teófilo Otoni — a \"constituição municipal\".\n\nUse para perguntas sobre a estrutura e as regras fundamentais do município: competências da Câmara e do Prefeito, número de vereadores, mandatos e posse, processo legislativo, vetos, orçamento público, princípios da administração, direitos garantidos pelo município, organização político-administrativa.\n\nExemplos: \"quantos vereadores tem a Câmara?\", \"quem pode propor emendas?\"\n\nEscreva a consulta como o assunto procurado, em linguagem natural (ou \"Art. N\", se o usuário citar um artigo).",
+        "weaviateCollection": {
+          "__rl": true,
+          "mode": "id",
+          "value": "LeiOrganica"
+        },
+        "topK": 5,
+        "includeDocumentMetadata": true,
+        "options": {
+          "metadataKeys": "referencia,contexto,pagina,url_pdf",
+          "hybridQuery": "={{ $fromAI('input') }}",
+          "alpha": 0.6
+        }
+      },
+      "id": "b698bebb-f461-58d1-97ce-5ae7b31fd73c",
+      "name": "consultar_lei_organica",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreWeaviate",
+      "typeVersion": 1.3,
+      "position": [
+        60,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Busca nas LEIS MUNICIPAIS ORDINÁRIAS de Teófilo Otoni (acervo de 2024 a 2026).\n\nUse para perguntas sobre regras específicas e concretas criadas pela Câmara: programas municipais, denominação de ruas e praças, obrigações de estabelecimentos comerciais, datas comemorativas, subvenções a entidades, políticas setoriais, utilidade pública.\n\nExemplos: \"existe lei sobre coleta seletiva?\", \"qual lei criou o programa X?\"\n\nEscreva a consulta como o assunto procurado, em linguagem natural (ou o número da lei, se o usuário citar).",
+        "weaviateCollection": {
+          "__rl": true,
+          "mode": "id",
+          "value": "LeisMunicipais"
+        },
+        "topK": 5,
+        "includeDocumentMetadata": true,
+        "options": {
+          "metadataKeys": "referencia,ementa,ano,url_pagina",
+          "hybridQuery": "={{ $fromAI('input') }}",
+          "alpha": 0.6
+        }
+      },
+      "id": "8a6e1527-a3ab-53fc-927a-1d0dc276999a",
+      "name": "buscar_leis_municipais",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreWeaviate",
+      "typeVersion": 1.3,
+      "position": [
+        320,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-small",
+        "options": {}
+      },
+      "id": "34a4967c-6cf9-5fb0-99c7-a718466b66b9",
+      "name": "Embeddings OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        200,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### 🔧 As duas ferramentas\nCada uma é um nó Weaviate no modo **Retrieve Documents (As Tool for AI Agent)**, apontando para uma coleção diferente. A busca é **híbrida** (alpha 0.6), como no notebook. O **mesmo** modelo de embeddings da ingestão (`text-embedding-3-small`) é obrigatório: vetores de modelos diferentes não se comparam.",
+        "width": 520,
+        "height": 200
+      },
+      "id": "326376b9-1968-5119-98fa-06e7dfaaf2ea",
+      "name": "Nota: ferramentas",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        20,
+        640
+      ]
+    }
+  ],
+  "connections": {
+    "Chat": {
+      "main": [
+        [
+          {
+            "node": "Agente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Ollama llama3.1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Agente",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memória da conversa": {
+      "ai_memory": [
+        [
+          {
+            "node": "Agente",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "consultar_lei_organica": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "buscar_leis_municipais": {
+      "ai_tool": [
+        [
+          {
+            "node": "Agente",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "consultar_lei_organica",
+            "type": "ai_embedding",
+            "index": 0
+          },
+          {
+            "node": "buscar_leis_municipais",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

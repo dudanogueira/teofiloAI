@@ -172,6 +172,18 @@ equivalente visual aos `🔧 ferramenta(...)` que o notebook imprimia.
   gravar, mas no n8n 2.40 ela apaga a coleção **a cada lote de 200 trechos**, e só o último
   lote sobreviveria. Por isso a ingestão apaga as coleções pela API REST do Weaviate antes.
 
+## 🦙 Opcional: LLM local com Ollama
+
+Quer ver o agente respondendo com um modelo aberto rodando na sua máquina? O Ollama tem um
+compose separado, que você soma ao principal com `-f`:
+
+```bash
+docker compose -f docker-compose.yml -f docker-compose.ollama.yml up -d
+```
+
+Tudo sobre ele (baixar modelos, terminal interativo, o workflow do agente com Ollama e o
+desempenho medido) está em [`ollama/README.md`](ollama/README.md).
+
 ## Comandos úteis
 
 ```bash
