@@ -26,6 +26,10 @@ a arquitetura não depende do fornecedor.
 A versão local serve para quem quer o dado na própria máquina, não pode usar Colab, ou
 quer ver como se sobe a infra de verdade.
 
+> 🔀 **Existe também uma versão sem código, em [n8n](n8n/)**: Weaviate + n8n no Docker,
+> com um workflow de ingestão e outro com o agente (Lei Orgânica e leis municipais em
+> duas coleções separadas). Instruções em [`n8n/README.md`](n8n/README.md).
+
 ---
 
 # ☁️ Versão nuvem (Colab + Gemini)

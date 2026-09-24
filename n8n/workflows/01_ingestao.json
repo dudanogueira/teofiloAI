@@ -1,0 +1,753 @@
+{
+  "id": "CursoIngestao001",
+  "name": "01 · Ingestão das leis de Teófilo Otoni",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## 📥 Ingestão — equivale às Partes 3 a 5 do notebook\n\nClique em **Execute workflow**. Leva alguns minutos (são ~450 PDFs).\n\n1. Apaga as coleções antigas (a execução pode ser repetida sem duplicar dados)\n2. **Em cima:** leis ordinárias 2024–2026 → coleção `LeisMunicipais`\n3. **Embaixo:** Lei Orgânica, artigo por artigo → coleção `LeiOrganica`\n\n⚠️ Antes de rodar, escolha as credenciais nos nós **Gravar em …** (Weaviate) e **Embeddings OpenAI …** (OpenAI).",
+        "width": 520,
+        "height": 320,
+        "color": 4
+      },
+      "id": "611806ee-d10e-5c2e-9ec1-866a8f0b197a",
+      "name": "Nota: visão geral",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        -520
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "29ad7e4d-ba58-51b7-9075-0bc8fcf997e8",
+      "name": "Iniciar ingestão",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -420,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "return ['LeisMunicipais', 'LeiOrganica'].map(colecao => ({ json: { colecao } }));"
+      },
+      "id": "ac96d7ae-370c-505b-b0fe-95d8667e98a0",
+      "name": "Coleções a recriar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### 🧹 Por que apagar antes?\nNo notebook removíamos os tenants para reimportar do zero. Aqui fazemos o mesmo apagando as coleções pela API REST do Weaviate. O nó Weaviate cria a coleção de novo sozinho no primeiro insert.\n\n(A opção *Clear Data* do nó Weaviate não serve: ela apaga a coleção a cada lote de 200 trechos.)",
+        "width": 420,
+        "height": 180
+      },
+      "id": "07360882-f7b2-5e52-8443-d8db2e1a51da",
+      "name": "Nota: apagar",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -240,
+        -200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "=http://weaviate:8080/v1/schema/{{ $json.colecao }}",
+        "options": {}
+      },
+      "id": "7667d734-9ff0-5edc-8929-ccb091e0d467",
+      "name": "Apagar coleções",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        20,
+        0
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "content": "## 📚 Leis ordinárias (2024–2026)\nMesma API JSON do portal da Câmara usada no notebook (`/legislacoes/get/4`), um pedido por ano. Depois baixamos o PDF de cada lei e extraímos o texto.",
+        "width": 1560,
+        "height": 520,
+        "color": 5
+      },
+      "id": "703008b3-0f41-561f-b8bb-48c4b0942413",
+      "name": "Nota: leis",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        240,
+        -300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// 👇 Quer uma base maior? Acrescente anos aqui (igual a ANOS no notebook).\nconst ANOS = [2024, 2025, 2026];\n\nreturn ANOS.map(ano => ({ json: { ano } }));\n"
+      },
+      "id": "c6f4b46d-805a-5dd4-b5d2-5147168dcb85",
+      "name": "Anos (2024–2026)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        260,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://www.teofilootoni.mg.leg.br/legislacoes/get/4",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "draw",
+              "value": "1"
+            },
+            {
+              "name": "start",
+              "value": "0"
+            },
+            {
+              "name": "length",
+              "value": "2000"
+            },
+            {
+              "name": "ano",
+              "value": "={{ $json.ano }}"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0"
+            },
+            {
+              "name": "X-Requested-With",
+              "value": "XMLHttpRequest"
+            }
+          ]
+        },
+        "options": {
+          "timeout": 60000
+        }
+      },
+      "id": "a68d2bb8-8364-5a58-9330-c7b0b40e0005",
+      "name": "Listar leis do ano",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "data",
+        "options": {}
+      },
+      "id": "8b51a0aa-44e5-53dd-aa46-022b1c519ee0",
+      "name": "Separar leis",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        700,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Equivale a url_do_pdf() + o filtro \"só leis com PDF\" do notebook.\nconst BASE = 'https://www.teofilootoni.mg.leg.br';\nconst S3 = 'https://digitaliza-institucional.s3.us-east-2.amazonaws.com/';\n\nconst saida = [];\nfor (const item of $input.all()) {\n  const lei = item.json;\n  const caminho = lei.arquivo && lei.arquivo.path;\n  if (!caminho) continue;                         // lei sem PDF: fica de fora\n\n  saida.push({\n    json: {\n      id: lei.id,\n      numero: String(lei.numero),\n      ano: Number(lei.ano),\n      ementa: lei.ementa || '',\n      url_pdf: S3 + caminho.split('/').map(encodeURIComponent).join('/'),\n      url_pagina: `${BASE}/legislacoes/show/${lei.id}`,\n    },\n  });\n}\nreturn saida;\n"
+      },
+      "id": "de15c139-79c3-5b24-b466-47a31b102408",
+      "name": "Preparar leis",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        920,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url_pdf }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0"
+            }
+          ]
+        },
+        "options": {
+          "batching": {
+            "batch": {
+              "batchSize": 8
+            }
+          },
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          },
+          "timeout": 120000
+        }
+      },
+      "id": "105b6560-a2d1-52ea-a59e-ad2b5fac4b5f",
+      "name": "Baixar PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1140,
+        0
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {}
+      },
+      "id": "5bb1819e-a579-56a4-8e84-e6714897f409",
+      "name": "Extrair texto do PDF",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        1360,
+        0
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Porta da função limpar() do notebook (célula \"3.4\"): entidades HTML e espaços.\nfunction limpar(texto) {\n  texto = (texto || '')\n    .replace(/&quot;/g, '\"').replace(/&#0?39;/g, \"'\").replace(/&apos;/g, \"'\")\n    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ')\n    .replace(/&#(\\d+);/g, (_, n) => String.fromCharCode(Number(n)))\n    .replace(/&amp;/g, '&');\n  texto = texto.replace(/[ \\t]+/g, ' ');      // vários espaços -> um só\n  texto = texto.replace(/\\n{3,}/g, '\\n\\n');   // 3+ quebras -> 2\n  return texto.trim();\n}\n\n// Junta o texto extraído do PDF com os dados da lei (que vieram de \"Preparar leis\").\nconst saida = [];\n$input.all().forEach((item, i) => {\n  const lei = $('Preparar leis').itemMatching(i).json;\n  const texto = limpar(item.json.text);\n  if (texto.length < 200) return;                 // PDF vazio, só imagem ou download que falhou\n\n  saida.push({\n    json: {\n      fonte: 'lei_municipal',\n      referencia: `Lei nº ${lei.numero}/${lei.ano}`,\n      numero: lei.numero,\n      ano: lei.ano,\n      ementa: limpar(lei.ementa),\n      // A ementa vai junto do texto para também virar vetor (no notebook ela era\n      // uma propriedade vetorizada à parte).\n      texto: `${limpar(lei.ementa)}\\n\\n${texto}`,\n      url_pdf: lei.url_pdf,\n      url_pagina: lei.url_pagina,\n    },\n  });\n});\nreturn saida;\n"
+      },
+      "id": "1a6de7b7-5799-54da-b535-6c97ec0a280f",
+      "name": "Limpar texto",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1580,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 🗄️ Gravar no Weaviate\nO nó **Carregar documento** transforma cada lei em documento (o campo `texto`) e anexa os metadados. O **Dividir em trechos** corta em pedaços de 1200 caracteres com 150 de sobreposição, igual ao `divisor_leis` do notebook. O **Embeddings OpenAI** gera o vetor de cada trecho, e o Weaviate guarda tudo em `LeisMunicipais`.",
+        "width": 620,
+        "height": 720,
+        "color": 6
+      },
+      "id": "ac6f52a0-f2eb-5847-a91f-f6cd86716502",
+      "name": "Nota: gravar leis",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        -300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "weaviateCollection": {
+          "__rl": true,
+          "mode": "id",
+          "value": "LeisMunicipais"
+        },
+        "embeddingBatchSize": 200,
+        "options": {}
+      },
+      "id": "4cea8dd8-0a61-556f-8960-1a73aee6dd02",
+      "name": "Gravar em LeisMunicipais",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreWeaviate",
+      "typeVersion": 1.3,
+      "position": [
+        1900,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.texto }}",
+        "textSplittingMode": "custom",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "fonte",
+                "value": "={{ $json.fonte }}"
+              },
+              {
+                "name": "referencia",
+                "value": "={{ $json.referencia }}"
+              },
+              {
+                "name": "numero",
+                "value": "={{ $json.numero }}"
+              },
+              {
+                "name": "ano",
+                "value": "={{ $json.ano }}"
+              },
+              {
+                "name": "ementa",
+                "value": "={{ $json.ementa }}"
+              },
+              {
+                "name": "url_pdf",
+                "value": "={{ $json.url_pdf }}"
+              },
+              {
+                "name": "url_pagina",
+                "value": "={{ $json.url_pagina }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "1db93021-5649-5643-b237-fe9327b18566",
+      "name": "Carregar documento (lei)",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        2060,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "chunkSize": 1200,
+        "chunkOverlap": 150,
+        "options": {}
+      },
+      "id": "7dc26f22-46cf-5216-9cbe-a1127590a8d8",
+      "name": "Dividir em trechos (1200/150)",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        2160,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-small",
+        "options": {}
+      },
+      "id": "e262d2e6-27a8-57c4-b57c-bfc98f5578ff",
+      "name": "Embeddings OpenAI (leis)",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1900,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 📕 Lei Orgânica\nUm PDF só, lido **página por página** (para sabermos a página de cada artigo). O nó **Extrair artigos** é a função `parse_lei_organica()` do notebook, traduzida para JavaScript: acha cada `Art. N` e guarda em que TÍTULO > CAPÍTULO > Seção ele está.",
+        "width": 1560,
+        "height": 520,
+        "color": 3
+      },
+      "id": "f78f59cf-35f2-54e4-adcf-cfea1168c478",
+      "name": "Nota: LO",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        240,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://digitaliza-institucional.s3.us-east-2.amazonaws.com/teofilo-otoni-camara-municipal/site/lei-organica-completa-com-emendas.pdf",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          },
+          "timeout": 120000
+        }
+      },
+      "id": "e298d492-2e3b-55cb-9658-d192d21a4100",
+      "name": "Baixar Lei Orgânica",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        700
+      ],
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "operation": "pdf",
+        "options": {
+          "joinPages": false
+        }
+      },
+      "id": "5cb6785a-b175-53b6-9d2f-4ff304f5c56a",
+      "name": "Extrair páginas",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        480,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "\n// Porta da função limpar() do notebook (célula \"3.4\"): entidades HTML e espaços.\nfunction limpar(texto) {\n  texto = (texto || '')\n    .replace(/&quot;/g, '\"').replace(/&#0?39;/g, \"'\").replace(/&apos;/g, \"'\")\n    .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ')\n    .replace(/&#(\\d+);/g, (_, n) => String.fromCharCode(Number(n)))\n    .replace(/&amp;/g, '&');\n  texto = texto.replace(/[ \\t]+/g, ' ');      // vários espaços -> um só\n  texto = texto.replace(/\\n{3,}/g, '\\n\\n');   // 3+ quebras -> 2\n  return texto.trim();\n}\n\n// Porta de parse_lei_organica() do notebook: quebra a Lei Orgânica em artigos,\n// guardando TÍTULO / CAPÍTULO / Seção e a página de cada um.\nconst LEI_ORGANICA_URL = 'https://digitaliza-institucional.s3.us-east-2.amazonaws.com/teofilo-otoni-camara-municipal/site/lei-organica-completa-com-emendas.pdf';\n\nconst RE_ARTIGO   = /^\\s*Art\\s*\\.?\\s*(\\d+)\\s*[-–ºo°.\\s]/i;\nconst RE_TITULO   = /^\\s*T[ÍI]TULO\\s+([IVXL]+)\\s*$/;\nconst RE_CAPITULO = /^\\s*CAP[ÍI]TULO\\s+([IVXL]+)\\s*$/;\nconst RE_SECAO    = /^\\s*Se[çc][ãa]o\\s+([IVXL]+)\\s*$/i;\nconst RE_NUM_PAG  = /^\\s*\\d{1,3}\\s*$/;             // número de página solto\n\nconst ehMaiuscula = s => s === s.toUpperCase() && s !== s.toLowerCase();\n\n// \"Extrair páginas\" entrega uma lista com o texto de cada página\nconst paginas = $input.first().json.text;\nconst listaPaginas = Array.isArray(paginas) ? paginas : [paginas];\n\n// Achata tudo em [linha, número da página], descartando lixo\nconst linhas = [];\nlistaPaginas.forEach((textoPagina, idx) => {\n  for (let linha of String(textoPagina || '').split('\\n')) {\n    linha = linha.replace(/[ \\t]+/g, ' ').trimEnd();\n    if (linha.trim() && !RE_NUM_PAG.test(linha)) linhas.push([linha, idx + 1]);\n  }\n});\n\n// O documento começa com um sumário; o corpo começa no primeiro \"TÍTULO I\" sozinho\nconst inicio = linhas.findIndex(([linha]) => RE_TITULO.test(linha));\nif (inicio < 0) throw new Error('Não achei o primeiro TÍTULO — o PDF mudou?');\n\nlet titulo = '', capitulo = '', secao = '';\nlet atual = null;\nconst artigos = [];\n\nfunction fecharArtigo() {\n  if (atual && atual.corpo.length) {\n    atual.texto = limpar(atual.corpo.join('\\n'));\n    delete atual.corpo;\n    artigos.push(atual);\n  }\n}\n\nlet i = inicio;\nwhile (i < linhas.length) {\n  const [linha, pagina] = linhas[i];\n  const proxima = i + 1 < linhas.length ? linhas[i + 1][0].trim() : '';\n  // o nome do TÍTULO/CAPÍTULO vem na linha seguinte, em maiúsculas\n  const temNome = Boolean(proxima) && ehMaiuscula(proxima);\n  let achou;\n\n  if (RE_TITULO.test(linha)) {\n    fecharArtigo(); atual = null;\n    titulo = temNome ? `${linha.trim()} - ${proxima}` : linha.trim();\n    capitulo = secao = '';\n    i += temNome ? 2 : 1;\n  } else if (RE_CAPITULO.test(linha)) {\n    fecharArtigo(); atual = null;\n    capitulo = temNome ? `${linha.trim()} - ${proxima}` : linha.trim();\n    secao = '';\n    i += temNome ? 2 : 1;\n  } else if (RE_SECAO.test(linha)) {\n    fecharArtigo(); atual = null;\n    secao = proxima ? `${linha.trim()} - ${proxima}` : linha.trim();\n    i += proxima ? 2 : 1;\n  } else if ((achou = linha.match(RE_ARTIGO))) {\n    fecharArtigo();\n    const numero = Number(achou[1]);\n    atual = { numero, titulo, capitulo, secao, pagina, corpo: [linha.trim()] };\n    i += 1;\n  } else {\n    if (atual) atual.corpo.push(linha.trim());\n    i += 1;\n  }\n}\nfecharArtigo();\n\nreturn artigos.map(a => {\n  const contexto = [a.titulo, a.capitulo, a.secao].filter(Boolean).join(' > ');\n  return {\n    json: {\n      fonte: 'lei_organica',\n      referencia: `Art. ${a.numero}`,\n      numero: String(a.numero),\n      contexto,\n      pagina: a.pagina,\n      // O contexto vai junto do texto para também virar vetor.\n      texto: `${contexto}\\n\\n${a.texto}`,\n      url_pdf: LEI_ORGANICA_URL,\n    },\n  };\n});\n"
+      },
+      "id": "8a97bc61-00a3-582a-b8c5-7118e2e0cab2",
+      "name": "Extrair artigos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        700,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "weaviateCollection": {
+          "__rl": true,
+          "mode": "id",
+          "value": "LeiOrganica"
+        },
+        "embeddingBatchSize": 200,
+        "options": {}
+      },
+      "id": "684a7881-e2bc-5c81-b4be-d4ab7f3320da",
+      "name": "Gravar em LeiOrganica",
+      "type": "@n8n/n8n-nodes-langchain.vectorStoreWeaviate",
+      "typeVersion": 1.3,
+      "position": [
+        1900,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "jsonMode": "expressionData",
+        "jsonData": "={{ $json.texto }}",
+        "textSplittingMode": "custom",
+        "options": {
+          "metadata": {
+            "metadataValues": [
+              {
+                "name": "fonte",
+                "value": "={{ $json.fonte }}"
+              },
+              {
+                "name": "referencia",
+                "value": "={{ $json.referencia }}"
+              },
+              {
+                "name": "numero",
+                "value": "={{ $json.numero }}"
+              },
+              {
+                "name": "contexto",
+                "value": "={{ $json.contexto }}"
+              },
+              {
+                "name": "pagina",
+                "value": "={{ $json.pagina }}"
+              },
+              {
+                "name": "url_pdf",
+                "value": "={{ $json.url_pdf }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "d5f02443-8ba2-5c49-8ce4-80b8f79faab3",
+      "name": "Carregar documento (artigo)",
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        2060,
+        920
+      ]
+    },
+    {
+      "parameters": {
+        "chunkSize": 1800,
+        "chunkOverlap": 200,
+        "options": {}
+      },
+      "id": "8602fe67-4dff-5c07-97de-dbf5c10f7872",
+      "name": "Dividir em trechos (1800/200)",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        2160,
+        1120
+      ]
+    },
+    {
+      "parameters": {
+        "model": "text-embedding-3-small",
+        "options": {}
+      },
+      "id": "23d05917-a4b7-5460-9c0c-c024ad3c9eb9",
+      "name": "Embeddings OpenAI (artigos)",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1900,
+        920
+      ]
+    }
+  ],
+  "connections": {
+    "Iniciar ingestão": {
+      "main": [
+        [
+          {
+            "node": "Coleções a recriar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Coleções a recriar": {
+      "main": [
+        [
+          {
+            "node": "Apagar coleções",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apagar coleções": {
+      "main": [
+        [
+          {
+            "node": "Anos (2024–2026)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Baixar Lei Orgânica",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anos (2024–2026)": {
+      "main": [
+        [
+          {
+            "node": "Listar leis do ano",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Listar leis do ano": {
+      "main": [
+        [
+          {
+            "node": "Separar leis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Separar leis": {
+      "main": [
+        [
+          {
+            "node": "Preparar leis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar leis": {
+      "main": [
+        [
+          {
+            "node": "Baixar PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Baixar PDF": {
+      "main": [
+        [
+          {
+            "node": "Extrair texto do PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair texto do PDF": {
+      "main": [
+        [
+          {
+            "node": "Limpar texto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limpar texto": {
+      "main": [
+        [
+          {
+            "node": "Gravar em LeisMunicipais",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Baixar Lei Orgânica": {
+      "main": [
+        [
+          {
+            "node": "Extrair páginas",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair páginas": {
+      "main": [
+        [
+          {
+            "node": "Extrair artigos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extrair artigos": {
+      "main": [
+        [
+          {
+            "node": "Gravar em LeiOrganica",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI (leis)": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Gravar em LeisMunicipais",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Carregar documento (lei)": {
+      "ai_document": [
+        [
+          {
+            "node": "Gravar em LeisMunicipais",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dividir em trechos (1200/150)": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Carregar documento (lei)",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI (artigos)": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Gravar em LeiOrganica",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Carregar documento (artigo)": {
+      "ai_document": [
+        [
+          {
+            "node": "Gravar em LeiOrganica",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dividir em trechos (1800/200)": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Carregar documento (artigo)",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "tags": []
+}

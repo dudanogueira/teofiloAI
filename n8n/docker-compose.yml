@@ -1,0 +1,68 @@
+# Versão n8n do curso: Weaviate + n8n lado a lado.
+#
+#   cd n8n
+#   docker compose up -d
+#   abra http://localhost:5678
+#
+# Conta, credenciais (OpenAI e Weaviate) e a importação dos dois workflows da pasta
+# ./workflows você faz na interface do n8n — veja o README.md.
+
+services:
+  weaviate:
+    image: cr.weaviate.io/semitechnologies/weaviate:1.39.5
+    container_name: weaviate-n8n
+    ports:
+      # Publicadas só para você acessar do seu computador (curl, notebook...).
+      # O n8n não usa: dentro do Docker ele fala com "weaviate:8080" e "weaviate:50051".
+      # São as mesmas portas do docker-compose.yml do notebook: não suba os dois juntos.
+      - "8080:8080"    # REST / GraphQL
+      - "50051:50051"  # gRPC
+    restart: on-failure
+    environment:
+      # Aula local, sem autenticação. NUNCA use assim em produção.
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "true"
+      PERSISTENCE_DATA_PATH: /var/lib/weaviate
+
+      # ⚠️ NÃO REMOVA. Sem isto o nome do nó vira o ID do contêiner, que muda a cada
+      # recriação; o estado do RAFT no volume guarda o nome antigo e o Weaviate fica
+      # preso em "leader not found" — com os dados intactos e inacessíveis.
+      CLUSTER_HOSTNAME: node1
+      RAFT_BOOTSTRAP_EXPECT: 1
+
+      # Aqui quem gera os vetores é o n8n (nó "Embeddings OpenAI"), não o Weaviate.
+      # O Weaviate só recebe o vetor pronto e o indexa.
+      DEFAULT_VECTORIZER_MODULE: none
+
+      QUERY_DEFAULTS_LIMIT: 25
+      LOG_LEVEL: info
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    healthcheck:
+      # A imagem do Weaviate não tem curl — só o wget do busybox.
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8080/v1/.well-known/ready"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  n8n:
+    image: n8nio/n8n:2.40.6
+    container_name: n8n-curso
+    ports:
+      - "5678:5678"
+    restart: on-failure
+    environment:
+      GENERIC_TIMEZONE: America/Sao_Paulo
+      TZ: America/Sao_Paulo
+      # Sem HTTPS em localhost: sem isto o navegador recusa o cookie de login.
+      N8N_SECURE_COOKIE: "false"
+      N8N_DIAGNOSTICS_ENABLED: "false"
+      N8N_PERSONALIZATION_ENABLED: "false"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      weaviate:
+        condition: service_healthy
+
+volumes:
+  weaviate_data:
+  n8n_data:

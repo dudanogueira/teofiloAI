@@ -1,0 +1,36 @@
+# Ollama opcional: um LLM rodando na sua máquina, dentro do Docker, ao lado do n8n.
+#
+# É um arquivo EXTRA, que se soma ao docker-compose.yml. Use os dois juntos, com -f:
+#
+#   docker compose -f docker-compose.yml -f docker-compose.ollama.yml up -d
+#
+# Instruções completas (baixar modelos, terminal interativo, ligar no n8n): ollama/README.md
+
+services:
+  ollama:
+    image: ollama/ollama:0.34.4
+    container_name: ollama-curso
+    restart: on-failure
+    ports:
+      # 11435 no seu computador, para não brigar com um Ollama nativo na 11434.
+      # O n8n não usa esta porta: dentro do Docker ele fala com http://ollama:11434.
+      - "11435:11434"
+    environment:
+      # Mantém o modelo na memória por 30 min entre perguntas (o padrão, 5 min, faz a
+      # primeira pergunta depois de uma pausa demorar bem mais).
+      OLLAMA_KEEP_ALIVE: 30m
+    volumes:
+      # Os modelos baixados ficam aqui: sobrevivem a "down" e a recriar o contêiner.
+      - ollama_data:/root/.ollama
+    # GPU NVIDIA no Linux (precisa do nvidia-container-toolkit): descomente o bloco abaixo.
+    # No Mac não há como: o Docker não acessa a GPU, e o Ollama roda só na CPU.
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: all
+    #           capabilities: [gpu]
+
+volumes:
+  ollama_data:
