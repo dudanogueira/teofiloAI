@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 410" width="860" height="410" role="img" aria-labelledby="t d">
+  <title id="t">Cache de camadas do docker build</title>
+  <desc id="d">Cada instrução do Dockerfile vira uma camada. No primeiro build, todas são construídas. No segundo, depois de editar app.py, as quatro primeiras vêm do cache e só o COPY do código e o que vem depois são refeitos.</desc>
+  <rect x="0.5" y="0.5" width="859" height="409" rx="14" fill="#FFFFFF" stroke="#E5E7EB"/>
+  <text x="180" y="40" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">Dockerfile</text>
+  <text x="485" y="40" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">1º build</text>
+  <text x="725" y="40" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">2º build</text>
+  <text x="725" y="58" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">depois de editar app.py</text>
+  <rect x="30" y="76" width="300" height="36" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="44" y="99" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" fill="#1F2937">FROM python:3.13-slim</text>
+  <rect x="380" y="76" width="210" height="36" rx="6" fill="#FEF3E2" stroke="#E8710A" stroke-width="1.5"/>
+  <text x="485.0" y="98.9" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#8A3F00">construída</text>
+  <rect x="620" y="76" width="210" height="36" rx="6" fill="#E6F4EA" stroke="#1E8E3E" stroke-width="1.5"/>
+  <text x="725.0" y="98.9" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="700" text-anchor="middle" fill="#0D5223">CACHED</text>
+  <rect x="30" y="120" width="300" height="36" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="44" y="143" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" fill="#1F2937">WORKDIR /app</text>
+  <rect x="380" y="120" width="210" height="36" rx="6" fill="#FEF3E2" stroke="#E8710A" stroke-width="1.5"/>
+  <text x="485.0" y="142.9" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#8A3F00">construída</text>
+  <rect x="620" y="120" width="210" height="36" rx="6" fill="#E6F4EA" stroke="#1E8E3E" stroke-width="1.5"/>
+  <text x="725.0" y="142.9" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="700" text-anchor="middle" fill="#0D5223">CACHED</text>
+  <rect x="30" y="164" width="300" height="36" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="44" y="187" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" fill="#1F2937">COPY requirements.txt .</text>
+  <rect x="380" y="164" width="210" height="36" rx="6" fill="#FEF3E2" stroke="#E8710A" stroke-width="1.5"/>
+  <text x="485.0" y="186.9" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#8A3F00">construída</text>
+  <rect x="620" y="164" width="210" height="36" rx="6" fill="#E6F4EA" stroke="#1E8E3E" stroke-width="1.5"/>
+  <text x="725.0" y="186.9" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="700" text-anchor="middle" fill="#0D5223">CACHED</text>
+  <rect x="30" y="208" width="300" height="36" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="44" y="231" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" fill="#1F2937">RUN pip install -r …</text>
+  <rect x="380" y="208" width="210" height="36" rx="6" fill="#FEF3E2" stroke="#E8710A" stroke-width="1.5"/>
+  <text x="485.0" y="230.9" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#8A3F00">construída</text>
+  <rect x="620" y="208" width="210" height="36" rx="6" fill="#E6F4EA" stroke="#1E8E3E" stroke-width="1.5"/>
+  <text x="725.0" y="230.9" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="700" text-anchor="middle" fill="#0D5223">CACHED</text>
+  <rect x="30" y="252" width="300" height="36" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="44" y="275" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" fill="#1F2937">COPY . .</text>
+  <rect x="380" y="252" width="210" height="36" rx="6" fill="#FEF3E2" stroke="#E8710A" stroke-width="1.5"/>
+  <text x="485.0" y="274.9" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#8A3F00">construída</text>
+  <rect x="620" y="252" width="210" height="36" rx="6" fill="#FEF3E2" stroke="#E8710A" stroke-width="1.5"/>
+  <text x="725.0" y="274.9" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#8A3F00">refeita</text>
+  <rect x="30" y="296" width="300" height="36" rx="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="44" y="319" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" fill="#1F2937">CMD [&quot;python&quot;, &quot;app.py&quot;]</text>
+  <rect x="380" y="296" width="210" height="36" rx="6" fill="#FEF3E2" stroke="#E8710A" stroke-width="1.5"/>
+  <text x="485.0" y="318.9" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#8A3F00">construída</text>
+  <rect x="620" y="296" width="210" height="36" rx="6" fill="#FEF3E2" stroke="#E8710A" stroke-width="1.5"/>
+  <text x="725.0" y="318.9" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#8A3F00">refeita (vem depois)</text>
+  <line x1="612" y1="248" x2="838" y2="248" stroke="#D93025" stroke-width="2" stroke-dasharray="4 4"/>
+  <text x="725" y="363" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#8C1D18">app.py mudou → esta camada e todas</text>
+  <text x="725" y="379" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#8C1D18">as de baixo são refeitas</text>
+  <text x="180" y="363" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">Por isso o requirements.txt é copiado</text>
+  <text x="180" y="379" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">antes do código: o pip install fica no cache.</text>
+</svg>

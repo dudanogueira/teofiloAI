@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Loja Teste · Aula de Automação</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 46rem; margin: 2rem auto; padding: 0 1rem; color: #222; }
+    h1 { font-size: 1.5rem; }
+    section { border: 1px solid #ddd; border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; }
+    label { display: block; margin: .6rem 0 .2rem; }
+    input[type=text], input[type=password], input[type=number], select { padding: .35rem; width: 16rem; }
+    button { margin-top: .8rem; padding: .45rem 1rem; cursor: pointer; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border-bottom: 1px solid #ddd; padding: .4rem; text-align: left; }
+    .erro { color: #b00020; }
+    .ok { color: #0a7a2f; }
+    .escondido { display: none; }
+  </style>
+</head>
+<body>
+  <h1>🛒 Loja Teste</h1>
+  <p>Página feita para praticar automação. Usuário: <code>aluno</code> · senha: <code>selenium123</code></p>
+
+  <!-- 1. Login: pratique localizadores (id, name, CSS, XPath) -->
+  <section id="tela-login">
+    <h2>Entrar</h2>
+    <form id="form-login">
+      <label for="usuario">Usuário</label>
+      <input type="text" id="usuario" name="usuario" autocomplete="off">
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" name="senha">
+      <br>
+      <button type="submit" class="btn-entrar" data-testid="entrar">Entrar</button>
+    </form>
+    <p id="erro-login" class="erro escondido">Usuário ou senha inválidos.</p>
+  </section>
+
+  <!-- 2. Painel: só aparece depois do login -->
+  <div id="painel" class="escondido">
+    <p id="boas-vindas" class="ok"></p>
+
+    <section>
+      <h2>Novo pedido</h2>
+      <form id="form-pedido">
+        <label for="cliente">Cliente</label>
+        <input type="text" id="cliente" name="cliente">
+
+        <label for="produto">Produto</label>
+        <select id="produto" name="produto">
+          <option value="">-- escolha --</option>
+          <option value="cafe">Café especial</option>
+          <option value="queijo">Queijo minas</option>
+          <option value="doce">Doce de leite</option>
+        </select>
+
+        <label for="quantidade">Quantidade</label>
+        <input type="number" id="quantidade" name="quantidade" value="1" min="1">
+
+        <label>Entrega</label>
+        <label><input type="radio" name="entrega" value="retirada" checked> Retirar na loja</label>
+        <label><input type="radio" name="entrega" value="casa"> Entregar em casa</label>
+
+        <label><input type="checkbox" id="presente" name="presente"> Embrulhar para presente</label>
+
+        <button type="submit" data-testid="enviar-pedido">Enviar pedido</button>
+      </form>
+      <p id="mensagem-pedido" role="status"></p>
+    </section>
+
+    <section>
+      <h2>Pedidos</h2>
+      <table id="tabela-pedidos">
+        <thead><tr><th>Cliente</th><th>Produto</th><th>Qtd.</th><th>Entrega</th></tr></thead>
+        <tbody>
+          <tr><td>Maria</td><td>Café especial</td><td>2</td><td>casa</td></tr>
+          <tr><td>João</td><td>Queijo minas</td><td>1</td><td>retirada</td></tr>
+          <tr><td>Ana</td><td>Doce de leite</td><td>3</td><td>casa</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 3. Conteúdo que demora: pratique esperas explícitas -->
+    <section>
+      <h2>Relatório</h2>
+      <button id="carregar-relatorio" type="button">Carregar relatório</button>
+      <p id="carregando" class="escondido">⏳ Carregando...</p>
+    </section>
+  </div>
+
+  <script>
+    const $ = (sel) => document.querySelector(sel);
+
+    $("#form-login").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const usuario = $("#usuario").value.trim();
+      if (usuario === "aluno" && $("#senha").value === "selenium123") {
+        $("#tela-login").classList.add("escondido");
+        $("#painel").classList.remove("escondido");
+        $("#boas-vindas").textContent = `Bem-vindo(a), ${usuario}!`;
+        document.title = "Painel · Loja Teste";
+      } else {
+        $("#erro-login").classList.remove("escondido");
+      }
+    });
+
+    $("#form-pedido").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const msg = $("#mensagem-pedido");
+      const cliente = $("#cliente").value.trim();
+      const produto = $("#produto");
+      if (!cliente || !produto.value) {
+        msg.className = "erro";
+        msg.textContent = "Preencha cliente e produto.";
+        return;
+      }
+      const nomeProduto = produto.options[produto.selectedIndex].text;
+      const qtd = $("#quantidade").value;
+      const entrega = document.querySelector("input[name=entrega]:checked").value;
+      const presente = $("#presente").checked ? " (para presente)" : "";
+
+      const linha = document.createElement("tr");
+      for (const valor of [cliente, nomeProduto, qtd, entrega]) {
+        const td = document.createElement("td");
+        td.textContent = valor;
+        linha.appendChild(td);
+      }
+      $("#tabela-pedidos tbody").appendChild(linha);
+
+      msg.className = "ok";
+      msg.textContent = `Pedido registrado: ${qtd} × ${nomeProduto} para ${cliente}${presente}.`;
+      e.target.reset();
+    });
+
+    // O relatório só aparece depois de 1,5 a 3 segundos, de propósito:
+    // um time.sleep(1) às vezes funciona e às vezes não.
+    $("#carregar-relatorio").addEventListener("click", () => {
+      $("#carregando").classList.remove("escondido");
+      $("#relatorio")?.remove();
+      setTimeout(() => {
+        $("#carregando").classList.add("escondido");
+        const total = document.querySelectorAll("#tabela-pedidos tbody tr").length;
+        const p = document.createElement("p");
+        p.id = "relatorio";
+        p.className = "ok";
+        p.textContent = `Total de pedidos: ${total}`;
+        $("#carregar-relatorio").after(p);
+      }, 1500 + Math.random() * 1500);
+    });
+  </script>
+</body>
+</html>

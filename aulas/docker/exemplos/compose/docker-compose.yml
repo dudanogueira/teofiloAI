@@ -1,0 +1,29 @@
+# Dois serviços que conversam pela rede que o Compose cria sozinho.
+# Suba com:   docker compose up -d --build
+# Derrube com: docker compose down -v
+services:
+  app:
+    build: ../app_flask        # constrói a imagem a partir do Dockerfile da outra pasta
+    ports:
+      # porta_no_seu_computador:porta_no_contêiner. Não usamos 5000 do lado de
+      # fora porque no Mac ela já é ocupada pelo AirPlay Receiver.
+      - "8000:5000"
+    environment:
+      NOME: Compose
+      REDIS_HOST: redis        # o nome do serviço vira o "endereço" na rede interna
+    depends_on:
+      redis:
+        condition: service_healthy
+
+  redis:
+    image: redis:8-alpine
+    volumes:
+      - redis_data:/data       # as visitas sobrevivem a um `down` (mas não a um `down -v`)
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 2s
+      retries: 10
+
+volumes:
+  redis_data:

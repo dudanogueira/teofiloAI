@@ -1,0 +1,8 @@
+# Arquivos que NÃO entram na imagem (deixa o build menor e mais rápido).
+__pycache__/
+*.pyc
+.venv/
+.env
+.git/
+Dockerfile
+.dockerignore

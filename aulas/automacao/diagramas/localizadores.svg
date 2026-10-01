@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 330" width="860" height="330" role="img" aria-labelledby="t d">
+  <title id="t">Localizadores: como o Selenium encontra elementos</title>
+  <desc id="d">Trecho do HTML do formulário de login e quatro localizadores apontando para os elementos: By.ID usuario, By.NAME senha, By.CSS_SELECTOR data-testid entrar e By.XPATH pelo texto do botão.</desc>
+  <rect x="0.5" y="0.5" width="859" height="329" rx="14" fill="#FFFFFF" stroke="#E5E7EB"/>
+  <rect x="30" y="40" width="400" height="250" rx="10" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="50" y="66" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="700" text-anchor="start" fill="#374151">HTML da página</text>
+  <text x="52" y="100" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" fill="#1F2937">&lt;form id=&quot;form-login&quot;&gt;</text>
+  <text x="74" y="128" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" fill="#1F2937">&lt;input id=&quot;usuario&quot;&gt;</text>
+  <text x="74" y="156" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" fill="#1F2937">&lt;input name=&quot;senha&quot; type=&quot;password&quot;&gt;</text>
+  <text x="74" y="184" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" fill="#1F2937">&lt;button data-testid=&quot;entrar&quot;&gt;</text>
+  <text x="96" y="212" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" fill="#1F2937">Entrar</text>
+  <text x="74" y="240" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" fill="#1F2937">&lt;/button&gt;</text>
+  <text x="52" y="268" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="400" text-anchor="start" fill="#1F2937">&lt;/form&gt;</text>
+  <rect x="520" y="46" width="310" height="54" rx="8" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5"/>
+  <text x="536" y="68" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="600" text-anchor="start" fill="#0B3D91">By.ID, &quot;usuario&quot;</text>
+  <text x="536" y="87" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" text-anchor="start" fill="#1E8E3E">único na página: prefira</text>
+  <defs><marker id="m1D63ED" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1D63ED"/></marker><marker id="m1D63EDs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1D63ED"/></marker></defs>
+  <path d="M518,73 C480,73 470,124 436,124" fill="none" stroke="#1D63ED" stroke-width="1.8" marker-end="url(#m1D63ED)"/>
+  <rect x="520" y="110" width="310" height="54" rx="8" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5"/>
+  <text x="536" y="132" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="600" text-anchor="start" fill="#0B3D91">By.NAME, &quot;senha&quot;</text>
+  <text x="536" y="151" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" text-anchor="start" fill="#1E8E3E">bom para formulários</text>
+  <path d="M518,137 C480,137 470,152 436,152" fill="none" stroke="#1D63ED" stroke-width="1.8" marker-end="url(#m1D63ED)"/>
+  <rect x="520" y="174" width="310" height="54" rx="8" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5"/>
+  <text x="536" y="196" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="600" text-anchor="start" fill="#0B3D91">By.CSS_SELECTOR, &quot;[data-testid=entrar]&quot;</text>
+  <text x="536" y="215" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" text-anchor="start" fill="#1E8E3E">feito para testes: ótimo</text>
+  <path d="M518,201 C480,201 470,180 436,180" fill="none" stroke="#1D63ED" stroke-width="1.8" marker-end="url(#m1D63ED)"/>
+  <rect x="520" y="238" width="310" height="54" rx="8" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5"/>
+  <text x="536" y="260" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="600" text-anchor="start" fill="#0B3D91">By.XPATH, &quot;//button[text()=&#x27;Entrar&#x27;]&quot;</text>
+  <text x="536" y="279" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" text-anchor="start" fill="#E8710A">poderoso, mas quebra fácil</text>
+  <path d="M518,265 C480,265 470,208 436,208" fill="none" stroke="#1D63ED" stroke-width="1.8" marker-end="url(#m1D63ED)"/>
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" width="860" height="420" role="img" aria-labelledby="t d">
+  <title id="t">Máquina virtual versus contêiner</title>
+  <desc id="d">À esquerda, cada máquina virtual carrega um sistema operacional convidado inteiro sobre um hypervisor. À direita, os contêineres levam só o app e as bibliotecas e compartilham o kernel do sistema por meio do Docker Engine.</desc>
+  <rect x="0.5" y="0.5" width="859" height="419" rx="14" fill="#FFFFFF" stroke="#E5E7EB"/>
+  <text x="220" y="38" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">Máquina virtual</text>
+  <text x="640" y="38" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">Contêineres</text>
+  <line x1="430" y1="24" x2="430" y2="396" stroke="#E5E7EB" stroke-width="1.5"/>
+  <rect x="40" y="330" width="360" height="40" rx="10" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="220.0" y="354.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#374151">Hardware do computador</text>
+  <rect x="40" y="284" width="360" height="40" rx="10" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="220.0" y="308.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#374151">Sistema operacional</text>
+  <rect x="40" y="238" width="360" height="40" rx="10" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="220.0" y="262.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#374151">Hypervisor (VirtualBox, Hyper-V…)</text>
+  <rect x="40" y="62" width="172" height="168" rx="10" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <rect x="50" y="72" width="152" height="36" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="126.0" y="94.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1F2937">App A</text>
+  <rect x="50" y="114" width="152" height="36" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="126.0" y="136.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">Bibliotecas</text>
+  <rect x="50" y="156" width="152" height="64" rx="10" fill="#FCE8E6" stroke="#D93025" stroke-width="1.5"/>
+  <text x="126.0" y="184.10000000000002" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#8C1D18">SO convidado</text>
+  <text x="126.0" y="201.00000000000003" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">inteiro (GBs)</text>
+  <rect x="228" y="62" width="172" height="168" rx="10" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <rect x="238" y="72" width="152" height="36" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="314.0" y="94.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1F2937">App B</text>
+  <rect x="238" y="114" width="152" height="36" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="314.0" y="136.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">Bibliotecas</text>
+  <rect x="238" y="156" width="152" height="64" rx="10" fill="#FCE8E6" stroke="#D93025" stroke-width="1.5"/>
+  <text x="314.0" y="184.10000000000002" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#8C1D18">SO convidado</text>
+  <text x="314.0" y="201.00000000000003" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">inteiro (GBs)</text>
+  <text x="220" y="394" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" text-anchor="middle" fill="#6B7280" font-style="italic">minutos para ligar · gigabytes cada</text>
+  <rect x="460" y="330" width="360" height="40" rx="10" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="640.0" y="354.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#374151">Hardware do computador</text>
+  <rect x="460" y="284" width="360" height="40" rx="10" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="640.0" y="308.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#374151">Sistema operacional (kernel Linux)</text>
+  <rect x="460" y="238" width="360" height="40" rx="10" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5"/>
+  <text x="640.0" y="262.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#0B3D91">Docker Engine</text>
+  <rect x="460" y="116" width="112" height="112" rx="10" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="516" y="134" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#0B3D91">contêiner</text>
+  <rect x="468" y="142" width="96" height="34" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="516.0" y="163.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1F2937">App A</text>
+  <rect x="468" y="184" width="96" height="34" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="516.0" y="205.2" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#6B7280">Bibliotecas</text>
+  <rect x="584" y="116" width="112" height="112" rx="10" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="640" y="134" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#0B3D91">contêiner</text>
+  <rect x="592" y="142" width="96" height="34" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="640.0" y="163.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1F2937">App B</text>
+  <rect x="592" y="184" width="96" height="34" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="640.0" y="205.2" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#6B7280">Bibliotecas</text>
+  <rect x="708" y="116" width="112" height="112" rx="10" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="764" y="134" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#0B3D91">contêiner</text>
+  <rect x="716" y="142" width="96" height="34" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="764.0" y="163.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#1F2937">App C</text>
+  <rect x="716" y="184" width="96" height="34" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="764.0" y="205.2" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="10" font-weight="400" text-anchor="middle" fill="#6B7280">Bibliotecas</text>
+  <text x="640" y="88" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">sem sistema convidado: todos usam o</text>
+  <text x="640" y="104" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">mesmo kernel, cada um no seu espaço isolado</text>
+  <text x="640" y="394" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="400" text-anchor="middle" fill="#6B7280" font-style="italic">segundos (ou menos) para ligar · megabytes cada</text>
+</svg>

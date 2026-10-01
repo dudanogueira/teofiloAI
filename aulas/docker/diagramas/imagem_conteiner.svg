@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 340" width="860" height="340" role="img" aria-labelledby="t d">
+  <title id="t">Do Dockerfile ao contêiner</title>
+  <desc id="d">O Dockerfile é a receita; docker build gera uma imagem em camadas, somente leitura; docker run cria contêineres a partir dela. Imagens são enviadas e baixadas de um registry como o Docker Hub com push e pull.</desc>
+  <rect x="0.5" y="0.5" width="859" height="339" rx="14" fill="#FFFFFF" stroke="#E5E7EB"/>
+  <rect x="30" y="100" width="170" height="132" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="115.0" y="134.5" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#1F2937">Dockerfile</text>
+  <text x="115.0" y="152.7" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="400" text-anchor="middle" fill="#1F2937">FROM …</text>
+  <text x="115.0" y="170.9" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="400" text-anchor="middle" fill="#1F2937">COPY …</text>
+  <text x="115.0" y="189.1" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="400" text-anchor="middle" fill="#1F2937">RUN …</text>
+  <text x="115.0" y="207.3" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="400" text-anchor="middle" fill="#1F2937">CMD …</text>
+  <text x="380" y="60" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle" fill="#1F2937">Imagem</text>
+  <text x="380" y="78" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">receita pronta · somente leitura</text>
+  <rect x="290" y="96" width="180" height="28" rx="5" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5"/>
+  <text x="380.0" y="114.9" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="400" text-anchor="middle" fill="#0B3D91">CMD</text>
+  <rect x="290" y="128" width="180" height="28" rx="5" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5"/>
+  <text x="380.0" y="146.9" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="400" text-anchor="middle" fill="#0B3D91">COPY código</text>
+  <rect x="290" y="160" width="180" height="28" rx="5" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5"/>
+  <text x="380.0" y="178.9" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="400" text-anchor="middle" fill="#0B3D91">RUN pip install</text>
+  <rect x="290" y="192" width="180" height="28" rx="5" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5"/>
+  <text x="380.0" y="210.9" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="400" text-anchor="middle" fill="#0B3D91">FROM python:3.13-slim</text>
+  <defs><marker id="m1F2937" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="m1F2937s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+  <line x1="202" y1="166" x2="286" y2="166" stroke="#1F2937" stroke-width="1.8" marker-end="url(#m1F2937)"/>
+  <rect x="196.2" y="145.6" width="95.6" height="15.9" rx="4" fill="#FFFFFF" opacity="0.95"/>
+  <text x="244" y="156" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="11" font-weight="500" text-anchor="middle" fill="#1F2937">docker build</text>
+  <rect x="280" y="270" width="200" height="50" rx="10" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="380.0" y="291.1" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#374151">Registry</text>
+  <text x="380.0" y="308.0" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">Docker Hub, cr.weaviate.io…</text>
+  <defs><marker id="m6B7280" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/></marker><marker id="m6B7280s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6B7280"/></marker></defs>
+  <line x1="350" y1="226" x2="350" y2="266" stroke="#6B7280" stroke-width="1.8" marker-end="url(#m6B7280)"/>
+  <text x="328" y="250" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="11" font-weight="500" text-anchor="end" fill="#6B7280">push</text>
+  <line x1="410" y1="266" x2="410" y2="226" stroke="#6B7280" stroke-width="1.8" marker-end="url(#m6B7280)"/>
+  <text x="422" y="250" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="11" font-weight="500" text-anchor="start" fill="#6B7280">pull</text>
+  <rect x="640" y="74" width="190" height="56" rx="10" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5"/>
+  <text x="735.0" y="98.1" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#0B3D91">contêiner 1</text>
+  <text x="735.0" y="115.0" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">web-aula · rodando</text>
+  <path d="M540,160 C590,160 590,102 636,102" fill="none" stroke="#1F2937" stroke-width="1.8" marker-end="url(#m1F2937)"/>
+  <rect x="640" y="146" width="190" height="56" rx="10" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5"/>
+  <text x="735.0" y="170.10000000000002" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#0B3D91">contêiner 2</text>
+  <text x="735.0" y="187.00000000000003" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">web2 · rodando</text>
+  <path d="M540,160 C590,160 590,174 636,174" fill="none" stroke="#1F2937" stroke-width="1.8" marker-end="url(#m1F2937)"/>
+  <rect x="640" y="218" width="190" height="56" rx="10" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="735.0" y="242.10000000000002" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#374151">contêiner 3</text>
+  <text x="735.0" y="259.0" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">parado</text>
+  <path d="M540,160 C590,160 590,246 636,246" fill="none" stroke="#1F2937" stroke-width="1.8" marker-end="url(#m1F2937)"/>
+  <line x1="472" y1="160" x2="541" y2="160" stroke="#1F2937" stroke-width="1.8"/>
+  <rect x="465.2" y="137.6" width="81.7" height="15.9" rx="4" fill="#FFFFFF" opacity="0.95"/>
+  <text x="506" y="148" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="11" font-weight="500" text-anchor="middle" fill="#1F2937">docker run</text>
+  <text x="735" y="306" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">cada contêiner ganha uma camada</text>
+  <text x="735" y="322" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">própria, onde pode escrever</text>
+</svg>
