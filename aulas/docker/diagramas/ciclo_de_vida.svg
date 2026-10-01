@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 280" width="860" height="280" role="img" aria-labelledby="t d">
+  <title id="t">Ciclo de vida de um contêiner</title>
+  <desc id="d">docker run cria o contêiner rodando. docker stop, ou o fim do processo, o deixa parado; docker start o liga de novo. docker rm remove um contêiner parado; docker rm -f remove mesmo rodando.</desc>
+  <rect x="0.5" y="0.5" width="859" height="279" rx="14" fill="#FFFFFF" stroke="#E5E7EB"/>
+  <circle cx="60" cy="120" r="9" fill="#1F2937" stroke="#1F2937" stroke-width="1.5"/>
+  <rect x="200" y="90" width="160" height="60" rx="10" fill="#E6F4EA" stroke="#1E8E3E" stroke-width="1.5"/>
+  <text x="280.0" y="115.80000000000001" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#0D5223">Rodando</text>
+  <text x="280.0" y="134.0" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="400" text-anchor="middle" fill="#0D5223">Up</text>
+  <rect x="500" y="90" width="160" height="60" rx="10" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="580.0" y="115.80000000000001" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#374151">Parado</text>
+  <text x="580.0" y="134.0" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">Exited</text>
+  <rect x="720" y="90" width="120" height="60" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="780.0" y="115.80000000000001" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#1F2937">Removido</text>
+  <text x="780.0" y="134.0" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">não existe mais</text>
+  <defs><marker id="m1F2937" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="m1F2937s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+  <line x1="70" y1="120" x2="196" y2="120" stroke="#1F2937" stroke-width="1.8" marker-end="url(#m1F2937)"/>
+  <rect x="89.0" y="98.6" width="88.0" height="17.4" rx="4" fill="#FFFFFF" opacity="0.95"/>
+  <text x="133" y="110" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="500" text-anchor="middle" fill="#1F2937">docker run</text>
+  <path d="M360,102 C405,58 455,58 500,102" fill="none" stroke="#1F2937" stroke-width="1.8" marker-end="url(#m1F2937)"/>
+  <rect x="296.3" y="44.6" width="267.3" height="17.4" rx="4" fill="#FFFFFF" opacity="0.95"/>
+  <text x="430" y="56" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="500" text-anchor="middle" fill="#1F2937">docker stop  ·  ou o processo termina</text>
+  <path d="M500,138 C455,182 405,182 360,138" fill="none" stroke="#1F2937" stroke-width="1.8" marker-end="url(#m1F2937)"/>
+  <rect x="378.4" y="174.6" width="103.2" height="17.4" rx="4" fill="#FFFFFF" opacity="0.95"/>
+  <text x="430" y="186" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="500" text-anchor="middle" fill="#1F2937">docker start</text>
+  <line x1="662" y1="120" x2="716" y2="120" stroke="#1F2937" stroke-width="1.8" marker-end="url(#m1F2937)"/>
+  <rect x="675.4" y="98.6" width="27.2" height="17.4" rx="4" fill="#FFFFFF" opacity="0.95"/>
+  <text x="689" y="110" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="500" text-anchor="middle" fill="#1F2937">rm</text>
+  <defs><marker id="mD93025" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D93025"/></marker><marker id="mD93025s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D93025"/></marker></defs>
+  <path d="M280,152 C280,262 780,262 780,154" fill="none" stroke="#D93025" stroke-width="1.8" stroke-dasharray="6 5" marker-end="url(#mD93025)"/>
+  <rect x="386.0" y="234.6" width="288.0" height="17.4" rx="4" fill="#FFFFFF" opacity="0.95"/>
+  <text x="530" y="246" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="500" text-anchor="middle" fill="#8C1D18">docker rm -f  (para e remove de uma vez)</text>
+</svg>

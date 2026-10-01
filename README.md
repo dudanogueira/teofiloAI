@@ -30,6 +30,10 @@ quer ver como se sobe a infra de verdade.
 > com um workflow de ingestão e outro com o agente (Lei Orgânica e leis municipais em
 > duas coleções separadas). Instruções em [`n8n/README.md`](n8n/README.md).
 
+> 📚 **Outras aulas** (2 h cada, Windows e Mac), na pasta [`aulas/`](aulas/):
+> [🐳 Docker do zero](aulas/docker/) — útil antes da versão local e da versão n8n — e
+> [🤖 Automação com Python](aulas/automacao/) (Selenium, testes, pywinauto e AppleScript).
+
 ---
 
 # ☁️ Versão nuvem (Colab + Gemini)

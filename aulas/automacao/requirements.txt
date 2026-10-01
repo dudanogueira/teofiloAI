@@ -1,0 +1,6 @@
+jupyter
+selenium>=4.11        # 4.11+ traz o Selenium Manager: baixa o driver do navegador sozinho
+pytest
+pyautogui
+pillow                # screenshots do pyautogui
+pywinauto; sys_platform == "win32"

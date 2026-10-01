@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 350" width="860" height="350" role="img" aria-labelledby="t d">
+  <title id="t">Docker Compose: app e Redis na mesma rede</title>
+  <desc id="d">O navegador acessa localhost:8000, publicado para a porta 5000 do serviço app. O Compose cria a rede compose_default; nela o app encontra o Redis pelo nome do serviço, redis. O Redis guarda os dados no volume redis_data.</desc>
+  <rect x="0.5" y="0.5" width="859" height="349" rx="14" fill="#FFFFFF" stroke="#E5E7EB"/>
+  <rect x="20" y="20" width="820" height="310" rx="14" fill="#FEF3E2" stroke="#E8710A" stroke-width="1.5"/>
+  <text x="40" y="46" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="700" text-anchor="start" fill="#8A3F00">Seu computador</text>
+  <rect x="44" y="146" width="160" height="64" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="124.0" y="173.8" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#1F2937">Navegador</text>
+  <text x="124.0" y="192.0" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="12" font-weight="400" text-anchor="middle" fill="#1F2937">localhost:8000</text>
+  <rect x="270" y="62" width="550" height="248" rx="10" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="290" y="86" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="700" text-anchor="start" fill="#0B3D91">rede compose_default</text>
+  <text x="474" y="86" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#6B7280">criada sozinha pelo Compose</text>
+  <rect x="300" y="138" width="190" height="80" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="395.0" y="164.70000000000002" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#1F2937">serviço app</text>
+  <text x="395.0" y="182.9" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">Flask · porta 5000</text>
+  <text x="395.0" y="201.10000000000002" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">build: ../app_flask</text>
+  <rect x="600" y="138" width="190" height="80" rx="10" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="695.0" y="164.70000000000002" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="14" font-weight="600" text-anchor="middle" fill="#1F2937">serviço redis</text>
+  <text x="695.0" y="182.9" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">porta 6379</text>
+  <text x="695.0" y="201.10000000000002" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">redis:8-alpine</text>
+  <defs><marker id="m1F2937" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker><marker id="m1F2937s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2937"/></marker></defs>
+  <line x1="206" y1="178" x2="296" y2="178" stroke="#1F2937" stroke-width="1.8" marker-end="url(#m1F2937)"/>
+  <rect x="200.7" y="155.6" width="74.7" height="15.9" rx="4" fill="#FFFFFF" opacity="0.95"/>
+  <text x="238" y="166" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="11" font-weight="500" text-anchor="middle" fill="#1F2937">8000:5000</text>
+  <defs><marker id="m1D63ED" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1D63ED"/></marker><marker id="m1D63EDs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1D63ED"/></marker></defs>
+  <line x1="492" y1="178" x2="596" y2="178" stroke="#1D63ED" stroke-width="1.8" marker-end="url(#m1D63ED)"/>
+  <rect x="503.2" y="155.6" width="81.7" height="15.9" rx="4" fill="#FFFFFF" opacity="0.95"/>
+  <text x="544" y="166" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="11" font-weight="500" text-anchor="middle" fill="#0B3D91">redis:6379</text>
+  <text x="544" y="202" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">o nome do serviço</text>
+  <text x="544" y="216" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">é o endereço</text>
+  <rect x="610" y="252" width="170" height="44" rx="10" fill="#E6F4EA" stroke="#1E8E3E" stroke-width="1.5"/>
+  <text x="695.0" y="278.55" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="600" text-anchor="middle" fill="#0D5223">volume redis_data</text>
+  <defs><marker id="m1E8E3E" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E8E3E"/></marker><marker id="m1E8E3Es" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1E8E3E"/></marker></defs>
+  <line x1="695" y1="220" x2="695" y2="250" stroke="#1E8E3E" stroke-width="1.8" marker-end="url(#m1E8E3E)"/>
+  <text x="395" y="264" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">depends_on: só sobe depois</text>
+  <text x="395" y="279" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="middle" fill="#6B7280">que o redis estiver healthy</text>
+</svg>

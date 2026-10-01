@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 350" width="860" height="350" role="img" aria-labelledby="t d">
+  <title id="t">time.sleep versus espera explícita</title>
+  <desc id="d">O relatório aparece entre 1,5 e 3 segundos; nesta execução, em 2,1 s. Com time.sleep(1), a procura acontece cedo demais e falha. Com time.sleep(5), funciona mas desperdiça quase 3 segundos. O WebDriverWait verifica a cada meio segundo e segue assim que o elemento aparece.</desc>
+  <rect x="0.5" y="0.5" width="859" height="349" rx="14" fill="#FFFFFF" stroke="#E5E7EB"/>
+  <rect x="362.0" y="52" width="192.0" height="232" fill="#E6F4EA" opacity="0.8"/>
+  <text x="458.0" y="44" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#0D5223">o relatório aparece em algum momento aqui</text>
+  <line x1="438.8" y1="52" x2="438.8" y2="284" stroke="#1E8E3E" stroke-width="2" stroke-dasharray="4 4"/>
+  <rect x="382.2" y="289.6" width="113.2" height="15.9" rx="4" fill="#FFFFFF" opacity="0.95"/>
+  <text x="438.8" y="300" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="500" text-anchor="middle" fill="#0D5223">apareceu (2,1 s)</text>
+  <line x1="170" y1="284" x2="810" y2="284" stroke="#1F2937" stroke-width="1.5"/>
+  <line x1="170" y1="280" x2="170" y2="288" stroke="#1F2937" stroke-width="1.5"/>
+  <text x="170" y="322" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">0 s</text>
+  <line x1="298" y1="280" x2="298" y2="288" stroke="#1F2937" stroke-width="1.5"/>
+  <text x="298" y="322" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">1 s</text>
+  <line x1="426" y1="280" x2="426" y2="288" stroke="#1F2937" stroke-width="1.5"/>
+  <text x="426" y="322" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">2 s</text>
+  <line x1="554" y1="280" x2="554" y2="288" stroke="#1F2937" stroke-width="1.5"/>
+  <text x="554" y="322" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">3 s</text>
+  <line x1="682" y1="280" x2="682" y2="288" stroke="#1F2937" stroke-width="1.5"/>
+  <text x="682" y="322" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">4 s</text>
+  <line x1="810" y1="280" x2="810" y2="288" stroke="#1F2937" stroke-width="1.5"/>
+  <text x="810" y="322" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="middle" fill="#6B7280">5 s</text>
+  <text x="24" y="101" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="600" text-anchor="start" fill="#1F2937">time.sleep(1)</text>
+  <text x="24" y="171" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="600" text-anchor="start" fill="#1F2937">time.sleep(5)</text>
+  <text x="24" y="241" font-family="'Cascadia Code', Consolas, 'SF Mono', Menlo, monospace" font-size="13" font-weight="600" text-anchor="start" fill="#1F2937">WebDriverWait</text>
+  <rect x="170" y="86" width="128" height="20" rx="4" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <text x="312" y="92" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="18" font-weight="700" text-anchor="start" fill="#D93025">✗</text>
+  <rect x="326.0" y="89.6" width="308.7" height="17.4" rx="4" fill="#FFFFFF" opacity="0.95"/>
+  <text x="332" y="101" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="start" fill="#8C1D18">procura cedo demais: NoSuchElementException</text>
+  <rect x="170" y="156" width="268.8" height="20" rx="4" fill="#F3F4F6" stroke="#9CA3AF" stroke-width="1.5"/>
+  <rect x="438.8" y="156" width="371.2" height="20" rx="4" fill="#FCE8E6" stroke="#D93025" stroke-width="1.5"/>
+  <text x="624.4" y="170" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#8C1D18">≈ 2,9 s jogados fora</text>
+  <text x="808" y="145" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="400" text-anchor="end" fill="#6B7280">funciona… devagar</text>
+  <rect x="170" y="226" width="320.0" height="20" rx="4" fill="#E8F0FE" stroke="#1D63ED" stroke-width="1.5"/>
+  <circle cx="170.0" cy="236" r="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="2"/>
+  <circle cx="234.0" cy="236" r="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="2"/>
+  <circle cx="298.0" cy="236" r="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="2"/>
+  <circle cx="362.0" cy="236" r="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="2"/>
+  <circle cx="426.0" cy="236" r="6" fill="#FFFFFF" stroke="#9CA3AF" stroke-width="2"/>
+  <circle cx="490.0" cy="236" r="6" fill="#E6F4EA" stroke="#1E8E3E" stroke-width="2"/>
+  <text x="504.0" y="241" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600" text-anchor="start" fill="#0D5223">achou na primeira verificação depois de aparecer</text>
+  <text x="504.0" y="258" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="400" text-anchor="start" fill="#6B7280">(verifica a cada 0,5 s · desiste após o timeout)</text>
+</svg>
