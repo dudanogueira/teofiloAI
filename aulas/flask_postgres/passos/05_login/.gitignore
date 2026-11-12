@@ -1,0 +1,9 @@
+# Ambiente virtual do Python: cada pessoa cria o seu, não vai para o git.
+.venv/
+
+# Arquivos gerados pelo Python.
+__pycache__/
+*.pyc
+
+# Segredos (senhas, chaves). NUNCA vão para o git.
+.env

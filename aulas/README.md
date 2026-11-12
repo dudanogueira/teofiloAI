@@ -4,9 +4,13 @@ Mini cursos de **2 horas**, em notebooks Jupyter, para iniciantes. Cada aula est
 própria com o notebook, os arquivos de exemplo e um `README.md` com a preparação.
 Tudo funciona em **Windows e Mac**.
 
+> A aula de Flask + Postgres é a exceção: é feita **no terminal** (git e Docker), seguindo o
+> roteiro do `README.md` dela, sem notebook.
+
 | Aula | O que se aprende | Precisa de |
 |---|---|---|
 | [🐳 Docker do zero](docker/) | imagens, contêineres, portas, volumes, `Dockerfile`, redes, Docker Compose e o SDK de Python | Docker Desktop |
+| [🧱 Do zero ao Docker: Flask + Postgres + Git](flask_postgres/) | criar um projeto, git e GitHub (`commit`, `push`, tag), `Dockerfile`, Docker Compose com Postgres, login com Flask-Login/Flask-WTF, gunicorn — em 7 passos, um commit por passo | Git, conta no GitHub, Docker Desktop |
 | [🤖 Automação com Python](automacao/) | Selenium, esperas, testes com pytest e Page Object; mouse e teclado com `pyautogui`; janelas com `pywinauto` (Windows) e AppleScript (Mac) | um navegador |
 
 A aula de Docker é uma boa preparação para a [versão local](../curso_agente_leis_local_docker.ipynb)

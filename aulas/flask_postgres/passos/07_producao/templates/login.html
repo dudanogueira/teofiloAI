@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% from "_campo.html" import campo %}
+{% block conteudo %}
+  <h1>Entrar</h1>
+  <form method="post" novalidate>
+    {{ form.hidden_tag() }}  {# o token CSRF vai aqui #}
+    {{ campo(form.nome, autofocus=true) }}
+    {{ campo(form.senha) }}
+    {{ form.enviar() }}
+  </form>
+  <p>Ainda não tem conta? <a href="{{ url_for('cadastro') }}">Cadastre-se</a>.</p>
+{% endblock %}

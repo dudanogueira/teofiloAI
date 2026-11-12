@@ -1,3 +1,4 @@
+# Referência do Dockerfile: https://docs.docker.com/reference/dockerfile/
 # 1. Imagem base: Linux enxuto com Python já instalado.
 FROM python:3.13-slim
 

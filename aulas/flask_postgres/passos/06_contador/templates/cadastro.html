@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% from "_campo.html" import campo %}
+{% block conteudo %}
+  <h1>Criar conta</h1>
+  <form method="post" novalidate>
+    {{ form.hidden_tag() }}
+    {{ campo(form.nome, autofocus=true) }}
+    {{ campo(form.senha) }}
+    {{ campo(form.confirmacao) }}
+    {{ form.enviar() }}
+  </form>
+  <p>Já tem conta? <a href="{{ url_for('login') }}">Entrar</a>.</p>
+{% endblock %}

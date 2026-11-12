@@ -1,0 +1,6 @@
+{# Templates do Flask (Jinja): https://flask.palletsprojects.com/en/stable/templating/ #}
+{# Mostra um campo do formulário com o rótulo e os erros de validação. #}
+{% macro campo(c) %}
+  {{ c.label }} {{ c(**kwargs) }}
+  {% for erro in c.errors %}<p class="erro">{{ erro }}</p>{% endfor %}
+{% endmacro %}

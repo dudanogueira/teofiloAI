@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contador</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 26rem; margin: 3rem auto; padding: 0 1rem; }
+    label, input { display: block; width: 100%; box-sizing: border-box; }
+    input { padding: .5rem; margin: .25rem 0 .75rem; }
+    button, input[type=submit] { padding: .5rem 1rem; cursor: pointer; width: auto; }
+    .aviso { background: #fff3cd; padding: .5rem .75rem; border-radius: .25rem; }
+    .erro { color: #b00020; font-size: .9rem; margin-top: -.5rem; }
+    nav { display: flex; justify-content: space-between; align-items: center; }
+    nav form { margin: 0; }
+  </style>
+</head>
+<body>
+  <nav>
+    <strong>Contador</strong>
+    {% if current_user.is_authenticated %}
+      <form method="post" action="{{ url_for('logout') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        {{ current_user.nome }} · <button>Sair</button>
+      </form>
+    {% endif %}
+  </nav>
+  {# Mensagens flash: https://flask.palletsprojects.com/en/stable/patterns/flashing/ #}
+  {% for mensagem in get_flashed_messages() %}
+    <p class="aviso">{{ mensagem }}</p>
+  {% endfor %}
+  {# Herança de templates (extends/block): https://flask.palletsprojects.com/en/stable/tutorial/templates/ #}
+  {% block conteudo %}{% endblock %}
+</body>
+</html>

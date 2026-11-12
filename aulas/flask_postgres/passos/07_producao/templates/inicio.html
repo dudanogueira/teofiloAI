@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block conteudo %}
+  <h1>Olá, {{ current_user.nome }}!</h1>
+  <p>O seu contador:</p>
+  <p style="font-size: 4rem; margin: 0; text-align: center"><strong id="contador">{{ current_user.contador }}</strong></p>
+  <div style="display: flex; gap: 1rem; justify-content: center">
+    <form method="post" action="{{ url_for('decrementar') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button style="font-size: 1.5rem">−1</button>
+    </form>
+    <form method="post" action="{{ url_for('incrementar') }}">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+      <button style="font-size: 1.5rem">+1</button>
+    </form>
+  </div>
+  <p><small>Entre com outro usuário numa janela anônima: cada um tem o seu número.</small></p>
+{% endblock %}

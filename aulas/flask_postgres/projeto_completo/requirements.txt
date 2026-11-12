@@ -1,0 +1,6 @@
+flask==3.1.*
+flask-sqlalchemy==3.1.*
+flask-login==0.6.*
+flask-wtf==1.2.*
+psycopg[binary]==3.2.*
+gunicorn==23.*

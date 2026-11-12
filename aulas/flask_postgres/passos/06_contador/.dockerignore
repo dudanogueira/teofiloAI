@@ -1,0 +1,9 @@
+# Arquivos que NÃO entram na imagem (build menor, mais rápido e sem segredos).
+.venv/
+__pycache__/
+*.pyc
+.env
+.git/
+Dockerfile
+.dockerignore
+docker-compose.yml
